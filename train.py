@@ -1,6 +1,6 @@
 import pandas as pd 
 from sklearn.model_selection import train_test_split
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import GradientBoostingRegressor
 import matplotlib.pyplot as plt
 import seaborn as sns
 import numpy as np
@@ -23,7 +23,7 @@ X_train, X_test, y_train, y_test = train_test_split(df, y, test_size=0.2, random
 #################################
 
 # Fit a model on the train section
-regr = RandomForestRegressor(max_depth=2, random_state=seed)
+regr = GradientBoostingRegressor(n_estimators=300, learning_rate=.5, random_state=seed)
 regr.fit(X_train, y_train)
 
 # Report training set score
@@ -54,7 +54,7 @@ sns.set(style="whitegrid")
 ax = sns.barplot(x="importance", y="feature", data=feature_df)
 ax.set_xlabel('Importance',fontsize = axis_fs) 
 ax.set_ylabel('Feature', fontsize = axis_fs)#ylabel
-ax.set_title('Random forest\nfeature importance', fontsize = title_fs)
+ax.set_title('GBM Regressor\nfeature importance', fontsize = title_fs)
 
 plt.tight_layout()
 plt.savefig("feature_importance.png",dpi=120) 
